@@ -32,7 +32,6 @@ namespace Polynomial_Function
             }
             return matrix;
         }
-                
 
         public double[] BackwardsSubstitution()
         {

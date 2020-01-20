@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Polynomial_Function
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Please input points in x y representation");
-            //List<Point> points = new List<Point>() { new Point(2, 5), new Point(3, 6), new Point(7,4) };
-            CartesianCoordinate cooridnate = new CartesianCoordinate();
-            cooridnate.SetCoordinates();
+            List<Point> points = new List<Point>() { new Point(1, -1), new Point(-2, 3), new Point(5, 1) };
+            CartesianCoordinate cooridnate = new CartesianCoordinate(points);
+            //cooridnate.SetCoordinates();
             cooridnate.DisplayCoordinate();
-
 
             EquationSystem equation = new EquationSystem(cooridnate);
             equation.SetMatrix();
@@ -23,7 +20,10 @@ namespace Polynomial_Function
 
             PolynomialFunction poly = new PolynomialFunction(equation.GetRoot());
             poly.DisplayPolynomial();
-
+            poly.CalculatePolynomial();
+            poly.DisplayPolynomialResult();
+            poly.getDerivativeCoefficient();
+            poly.DisplayDerivative();
         }
     }
 }

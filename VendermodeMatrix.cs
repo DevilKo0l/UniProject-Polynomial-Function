@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Polynomial_Function
 {
     public class VendermodeMatrix
     {
-        public int nRow, nCol;        
+        public int nRow, nCol;
         public double[,] matrix;
         public CartesianCoordinate _coordinate;
-        
-        public VendermodeMatrix(CartesianCoordinate coordinate )
+
+        public VendermodeMatrix(CartesianCoordinate coordinate)
         {
             _coordinate = coordinate;
             nRow = _coordinate.coordinatesList.Count;
-            nCol = nRow+1;
-            matrix = new double[nRow, nCol];           
+            nCol = nRow + 1;
+            matrix = new double[nRow, nCol];
         }
-        
+
         public void SetMatrix()
         {
             int exponent = nRow - 1;
@@ -29,7 +26,6 @@ namespace Polynomial_Function
                 double y = _coordinate.coordinatesList[i].y;
                 for (int j = 0; j < nCol; j++)
                 {
-                    
                     if (j == nCol - 2)
                     {
                         matrix[i, j] = 1;
@@ -45,20 +41,21 @@ namespace Polynomial_Function
                     exponent--;
                 }
                 exponent = _coordinate.coordinatesList.Count() - 1;
-            }            
+            }
         }
 
         public double[,] GetMatrix()
         {
             return this.matrix;
         }
+
         public void DisplayMatrix()
         {
             for (int i = 0; i < nRow; i++)
             {
                 for (int j = 0; j < nCol; j++)
                 {
-                    Console.Write("{0}  ",matrix[i,j]);
+                    Console.Write("{0}  ", matrix[i, j]);
                 }
                 Console.WriteLine();
             }
