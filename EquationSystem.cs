@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 
 namespace Polynomial_Function
 {
-    class EquationSystem: VendermodeMatrix
+    public class EquationSystem: VendermodeMatrix
     {
-        private readonly GaussianElimination _gausian;
-        private readonly Coordinate _coordinates;
 
-        public EquationSystem(Coordinate coordinate,GaussianElimination gaussian)
-            :base(coordinate)
-        {
-            _coordinates = coordinate;
-            _gausian = gaussian;
-           
-        }
         
+        private readonly Calculator _calculator;        
+
+        public EquationSystem(CartesianCoordinate coordinate)
+            :base(coordinate)
+        {            
+            _calculator = new Calculator(matrix);           
+        }
+        public double [] GetRoot()
+        {
+            _calculator.ForwardEliminationMatrix();
+            _calculator.Pivoting();
+            return _calculator.BackwardsSubstitution();
+        }
         public void DisplayResult()
         {
-            var result = _gausian.BackwardsSubstitution(matrix);
+            var result = GetRoot(); ;
             Console.WriteLine("\nResult: ");
             int numX = result.Length;
             for (int i = 0; i < numX; i++)

@@ -9,13 +9,20 @@ namespace Polynomial_Function
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please input points in x y representation.");
-            Console.WriteLine("Type END to finish.");
-            Coordinate newCoordinate = new Coordinate();
-            newCoordinate.SetCoordinates();
-            var coordinate = newCoordinate.GetCoordinates();
+            Console.WriteLine("Please input points in x y representation");
+            //List<Point> points = new List<Point>() { new Point(2, 5), new Point(3, 6), new Point(7,4) };
+            CartesianCoordinate cooridnate = new CartesianCoordinate();
+            cooridnate.SetCoordinates();
+            cooridnate.DisplayCoordinate();
 
-            EquationSystem newEquation = new EquationSystem(newCoordinate, new GaussianElimination());
+
+            EquationSystem equation = new EquationSystem(cooridnate);
+            equation.SetMatrix();
+            equation.DisplayMatrix();
+            equation.DisplayResult();
+
+            PolynomialFunction poly = new PolynomialFunction(equation.GetRoot());
+            poly.DisplayPolynomial();
 
         }
     }

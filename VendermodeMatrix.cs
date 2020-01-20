@@ -8,38 +8,39 @@ namespace Polynomial_Function
 {
     public class VendermodeMatrix
     {
-        public int nRow;
-        public int nCol;
+        public int nRow, nCol;        
         public double[,] matrix;
-        private readonly Coordinate _coordinate;
+        public CartesianCoordinate _coordinate;
         
-        public VendermodeMatrix(Coordinate coordintate)
+        public VendermodeMatrix(CartesianCoordinate coordinate )
         {
-            _coordinate = coordintate;
-            nRow = coordintate.GetCoordinates().Count;
-            nCol = coordintate.GetCoordinates().Count+1;
+            _coordinate = coordinate;
+            nRow = _coordinate.coordinatesList.Count;
+            nCol = nRow+1;
             matrix = new double[nRow, nCol];           
         }
         
-        public void SetVandermondeMatrix()
+        public void SetMatrix()
         {
-            int exponent = _coordinate.coordinatesList.Count() - 1;            
-            double[,] matrix = new double[nRow, nCol];
+            int exponent = nRow - 1;
             for (int i = 0; i < nRow; i++)
             {
+                double x = _coordinate.coordinatesList[i].x;
+                double y = _coordinate.coordinatesList[i].y;
                 for (int j = 0; j < nCol; j++)
                 {
+                    
                     if (j == nCol - 2)
                     {
                         matrix[i, j] = 1;
                     }
                     else if (j == nCol - 1)
                     {
-                        matrix[i, j] = _coordinate.coordinatesList[i].y;
+                        matrix[i, j] = y;
                     }
                     else
                     {
-                        matrix[i, j] = Math.Pow(_coordinate.coordinatesList[i].x, exponent);
+                        matrix[i, j] = Math.Pow(x, exponent);
                     }
                     exponent--;
                 }
@@ -47,7 +48,7 @@ namespace Polynomial_Function
             }            
         }
 
-        public double[,] GetVandermoodeMatrix()
+        public double[,] GetMatrix()
         {
             return this.matrix;
         }
